@@ -1,0 +1,59 @@
+ <?php
+	error_reporting(0);//不显示任何报错。
+	$link=mysql_connect("localhost","root1","root1") or die("失败".mysql_error());
+	mysql_select_db("animaldesign") or die("数据库选择失败");//选择数据库
+	$sql="select * from news  order  ";
+	mysql_query("set names utf8");//编码方式
+	$result=mysql_query($sql) or die("查询失败");//运行数据库语句
+		?>
+	
+ <?php
+
+	while($a=mysql_fetch_array($result,MYSQL_ASSOC)){
+		//echo $a;
+		echo "<div class='alert alert-success' role='alert'>";
+			echo "
+			<font color ='#000066'><strong>$a[newsname]:</strong></font>$a[news]
+			";
+			echo "</div>";
+		}
+	
+	mysql_free_result($result);
+	mysql_close($link);
+?>
+
+
+<div class="distracted">
+		  <h3 class="ghj">留言墙</h3>
+					<?php
+					header("Content-type: text/html; charset=utf-8");
+					error_reporting(0);//不显示任何报错。
+					$link=mysql_connect("localhost","root1","root1") or die("失败".mysql_error());
+					mysql_select_db("animaldesign") or die("数据库选择失败");//选择数据库
+					mysql_query("set names utf8");//编码方式
+					$sql="select * from LeaveMessage order by date desc limit 0,3";
+					$result=mysql_query("$sql");//运行数据库语句
+					
+					while($a=mysql_fetch_array($result,MYSQL_ASSOC)){
+					echo "<div class='alert alert-success' role='alert'>";
+					echo "
+					<font color ='#000088'><strong>$a[content]</strong></font>&nbsp;&nbsp;&nbsp;&nbsp;$a[nickname]&nbsp;&nbsp;&nbsp;&nbsp;$a[date]";
+					echo "</div>";
+					}
+					
+					mysql_free_result($result);
+					mysql_close($link);
+					?>
+			  
+		</div>
+	
+		<div align="center" >
+		<form name="formal" method="post" action="LeaveReceive.php">
+		<td>
+		昵称:</td><td><input size="35"   style="width:500px; height:30px;"  type="text" name="nickname"> </td>
+		<td><br/><br/>
+		留言:</td><td><input size="35"   style="width:500px; height:150px;"  type="text" type="textarea" name="content"> </td></tr><br/><br/>
+		<input type="submit" id="submit" value="提交"></td><td></td></tr>
+		</form>
+		
+		</div>
