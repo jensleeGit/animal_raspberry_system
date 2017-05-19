@@ -1,0 +1,2 @@
+# animal_raspberry_system
+基于树莓派的动物园管理系统
